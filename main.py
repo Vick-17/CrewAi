@@ -3,17 +3,12 @@ import subprocess
 import requests
 from dotenv import load_dotenv
 from crew import create_crew
-import time
-time.sleep(30)
 
 
 load_dotenv()
 
 
 def init_git_and_push(project_path, repo_name):
-    import os
-    import subprocess
-    import requests
 
     github_token = os.getenv("GITHUB_TOKEN")
     github_username = os.getenv("GITHUB_USERNAME")
@@ -27,9 +22,9 @@ def init_git_and_push(project_path, repo_name):
         "https://api.github.com/user/repos",
         headers={
             "Authorization": f"token {github_token}",
-            "Accept": "application/vnd.github+json"
+            "Accept": "application/vnd.github+json",
         },
-        json={"name": repo_name, "private": False}
+        json={"name": repo_name, "private": False},
     )
 
     if response.status_code not in [201, 422]:  # 422 = repo déjà existant
@@ -57,7 +52,7 @@ def init_git_and_push(project_path, repo_name):
         ["git", "commit", "-m", "Initial commit"],
         cwd=project_path,
         capture_output=True,
-        text=True
+        text=True,
     )
 
     if "nothing to commit" in commit.stderr.lower():
@@ -68,18 +63,16 @@ def init_git_and_push(project_path, repo_name):
     subprocess.run(["git", "branch", "-M", "main"], cwd=project_path)
 
     # Remove + add remote origin
-    subprocess.run(["git", "remote", "remove", "origin"],
-                   cwd=project_path, stderr=subprocess.DEVNULL)
-    subprocess.run(["git", "remote", "add", "origin",
-                   git_url], cwd=project_path)
+    subprocess.run(
+        ["git", "remote", "remove", "origin"],
+        cwd=project_path,
+        stderr=subprocess.DEVNULL,
+    )
+    subprocess.run(["git", "remote", "add", "origin", git_url], cwd=project_path)
 
     # Push
     subprocess.run(["git", "push", "-u", "origin", "main"], cwd=project_path)
     print("🚀 Projet poussé sur GitHub avec succès.")
-
-
-
-
 
 
 if __name__ == "__main__":
@@ -92,15 +85,14 @@ if __name__ == "__main__":
 
     import re
 
-
     def slugify_project_name(prompt):
         # Convertir la phrase en slug court et valide
-        project_name = re.sub(r'\W+', '-', prompt.lower()).strip('-')
+        project_name = re.sub(r"\W+", "-", prompt.lower()).strip("-")
         # Limite GitHub : max 100 caractères (on coupe à 80 pour plus de sécurité)
         return project_name[:20]
-    
+
     # 🔧 Récupère le nom du projet (ou génère un nom propre)
-    import re
+
     project_name = slugify_project_name(user_prompt)
     project_path = f"./projects/{project_name}"
 

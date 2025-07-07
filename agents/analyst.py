@@ -16,5 +16,5 @@ def create_analyst():
             "Maîtrise la formalisation UML, les approches agiles, DevOps, microservices, systèmes embarqués, IA, cloud et blockchain. "
             "Excellente compréhension business, capable de faire le lien entre la stratégie métier et la solution technique optimale."
         ),
-        verbose=True
+        verbose=True,
     )
