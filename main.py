@@ -4,6 +4,11 @@ import requests
 from dotenv import load_dotenv
 from crew import create_crew
 
+try:
+    from openai.error import RateLimitError, OpenAIError
+except Exception:  # pragma: no cover - openai might not be installed here
+    RateLimitError = OpenAIError = Exception
+
 
 load_dotenv()
 
@@ -79,7 +84,16 @@ if __name__ == "__main__":
     user_prompt = input("Quelle est ta demande ?\n> ")
 
     crew = create_crew(user_prompt)
-    result = crew.kickoff()
+
+    try:
+        result = crew.kickoff()
+    except RateLimitError as e:
+        print("❌ Limite d'utilisation OpenAI atteinte.")
+        print(e)
+        raise SystemExit(1)
+    except OpenAIError as e:
+        print("❌ Erreur lors de l'appel à l'API OpenAI :", e)
+        raise SystemExit(1)
 
     print("\n🧾 Résultat final :\n", result)
 
