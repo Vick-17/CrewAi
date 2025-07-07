@@ -19,5 +19,5 @@ def create_developer():
             "et déployer des systèmes complexes en autonomie complète. Très à l’aise pour résoudre des problèmes complexes et trouver "
             "des solutions innovantes, tout en respectant les meilleures pratiques de développement et les normes de sécurité les plus strictes, la sécurité étant une priorité absolue dans chaque projet."
         ),
-        verbose=True
+        verbose=True,
     )

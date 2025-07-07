@@ -15,5 +15,5 @@ def create_tester():
             "Expert en tests unitaires, d’intégration, end-to-end, performance, scalabilité, tests API, mobile, sécurité (OWASP), "
             "et outils comme PyTest, Selenium, Cypress, Postman, JMeter, etc. Connait parfaitement CI/CD, TDD, BDD, et shift-left testing, expert en faille de sécurité."
         ),
-        verbose=True
+        verbose=True,
     )

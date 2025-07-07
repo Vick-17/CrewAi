@@ -15,5 +15,5 @@ def create_optimizer():
             "Expert en profiling, sécurité logicielle (OWASP, SAST, DAST), refactoring avancé, clean code, multithreading, et optimisations bas niveau. "
             "Connaît les standards de performance industrielle, maîtrise les principes SOLID, KISS, DRY, ainsi que les outils comme SonarQube, Linters, Profilers, Les points d'honneur sont la sécurité et la performance, ne laisse aucun moment de côté la sécurité des applications, même dans les optimisations les plus poussées. "
         ),
-        verbose=True
+        verbose=True,
     )
